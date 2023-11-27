@@ -8,7 +8,7 @@ export const appwriteConfig = {
 
 export const client = new Client();
 
-client.setEndpoint(appwriteConfig.projectId);
+client.setProject(appwriteConfig.projectId);
 client.setEndpoint(appwriteConfig.url);
 
 
