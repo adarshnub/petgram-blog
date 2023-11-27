@@ -1,31 +1,29 @@
-import React from 'react';
-import {Outlet, Navigate} from 'react-router-dom';
+import React from "react";
+import { Outlet, Navigate } from "react-router-dom";
 
 const AuthLayout = () => {
   const isAuthenticated = false;
   return (
     <>
-    {
-      isAuthenticated ? (
-        <Navigate to='/' />
+      {isAuthenticated ? (
+        <Navigate to="/" />
       ) : (
         <>
-        <section
-        className='bg-black flex flex-1 justify-center items-center flex-col'
-        >
-          <Outlet />
-        </section>
+          <video autoPlay loop muted id="video">
+            <source src={"/assets/blob12.mp4"} type="video/mp4" />
+          </video>
 
-        <img 
-        src='/assets/cc2.png'
-        alt='logo'
-        className='hidden xl:block h-screen w-2/3 object-cover bg-no-repeat'
-        />
+          <section className="bg-transparent hover:bg-[#ddd9ed]  shadow-xl flex  justify-center items-center rounded-xl flex-col px-8 py-6 mx-auto h-fit my-auto">
+            <Outlet />
+          </section>
         </>
-      )
-    }
+      )}
     </>
-  )
-}
+  );
+};
 
 export default AuthLayout;
+
+// style={{
+//   backgroundImage: `url("https://media.istockphoto.com/id/961812408/video/liquid-blobs-loop-4k-blue.mp4?s=mp4-640x640-is&k=20&c=lwsq2q1E9C0cZKvON9JlEJxwHu76Jwd08hyUmmulZs8=")`
+// }}
