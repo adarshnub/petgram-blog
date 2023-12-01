@@ -13,9 +13,12 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { SignupValidation } from "@/lib/validation";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { creeateUserAccount } from "@/lib/appwrite/api";
-import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations";
+import {
+  useCreateUserAccount,
+  useSignInAccount,
+} from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 
 const SignupForm = () => {
@@ -23,11 +26,14 @@ const SignupForm = () => {
 
   const navigate = useNavigate();
 
-  const {checkAuthUser, isLoading: isUserLoading} = useUserContext();
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
-  const { mutateAsync: creeateUserAccount, isPending: isCreatingAccount } = useCreateUserAccount();
+  //queries
+  const { mutateAsync: creeateUserAccount, isPending: isCreatingAccount } =
+    useCreateUserAccount();
 
-  const { mutateAsync: signInAccount, isPending: isSigningIn} = useSignInAccount();
+  const { mutateAsync: signInAccount, isPending: isSigningIn } =
+    useSignInAccount();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -54,16 +60,16 @@ const SignupForm = () => {
       password: values.password,
     });
 
-    if(!session) {
-      return toast({title : 'Sign in failed . Please try again'})
+    if (!session) {
+      return toast({ title: "Sign in failed . Please try again" });
     }
     const isLoggedIn = await checkAuthUser();
 
-    if(isLoggedIn) {
+    if (isLoggedIn) {
       form.reset();
-      navigate('/')
-    }else {
-      toast({title : 'Sign up failed. Please try again'})
+      navigate("/");
+    } else {
+      toast({ title: "Sign up failed. Please try again" });
     }
   }
 
@@ -112,9 +118,7 @@ const SignupForm = () => {
                   {...field}
                 />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
+
               <FormMessage />
             </FormItem>
           )}
@@ -134,9 +138,7 @@ const SignupForm = () => {
                   {...field}
                 />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
+
               <FormMessage />
             </FormItem>
           )}
@@ -156,9 +158,7 @@ const SignupForm = () => {
                   {...field}
                 />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
+
               <FormMessage />
             </FormItem>
           )}

@@ -65,7 +65,7 @@ const SigninForm = () => {
       </div>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col mt-2 w-full gap-4 "
+        className="flex flex-col mt-2 w-full gap-4 max-w-5xl "
       >
         <FormField
           control={form.control}
@@ -108,7 +108,7 @@ const SigninForm = () => {
         />
 
         <Button type="submit" className="font-bold">
-          {isUserLoading ? <div>Loading...</div> : "Login"}
+          {isUserLoading ? <div className="text-white">Loading...</div> : "Login"}
         </Button>
 
         <p className="text-sm text-gray-700 text-center mt-2">

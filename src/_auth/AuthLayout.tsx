@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Outlet, Navigate } from "react-router-dom";
 
 const AuthLayout = () => {
@@ -13,7 +13,7 @@ const AuthLayout = () => {
             <source src={"/assets/blob12.mp4"} type="video/mp4" />
           </video>
 
-          <section className="bg-transparent hover:bg-[#ddd9ed]  shadow-xl flex  justify-center items-center rounded-xl flex-col px-8 py-6 mx-auto h-fit my-auto">
+          <section className="bg-transparent hover:bg-[#ddd9ed]  shadow-xl flex  justify-center items-center rounded-xl flex-col px-8 py-6 mx-auto h-fit my-auto w-3/4 max-w-2xl">
             <Outlet />
           </section>
         </>
