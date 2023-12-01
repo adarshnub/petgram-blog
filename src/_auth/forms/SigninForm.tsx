@@ -12,10 +12,10 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
-import { SignInValidation, SignupValidation } from "@/lib/validation";
-import { Link ,useNavigate} from "react-router-dom";
-// import { creeateUserAccount } from "@/lib/appwrite/api";
-import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations";
+import { SignInValidation } from "@/lib/validation";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 
 const SigninForm = () => {
@@ -23,17 +23,14 @@ const SigninForm = () => {
 
   const navigate = useNavigate();
 
-  const {checkAuthUser, isLoading: isUserLoading} = useUserContext();
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
-  
-
-  const { mutateAsync: signInAccount} = useSignInAccount();
+  const { mutateAsync: signInAccount } = useSignInAccount();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignInValidation>>({
     resolver: zodResolver(SignInValidation),
     defaultValues: {
-      
       email: "",
       password: "",
     },
@@ -41,23 +38,21 @@ const SigninForm = () => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof SignInValidation>) {
-    
-
     const session = await signInAccount({
       email: values.email,
       password: values.password,
     });
 
-    if(!session) {
-      return toast({title : 'Sign in failed . Please try again'})
+    if (!session) {
+      return toast({ title: "Sign in failed . Please try again" });
     }
     const isLoggedIn = await checkAuthUser();
 
-    if(isLoggedIn) {
+    if (isLoggedIn) {
       form.reset();
-      navigate('/')
-    }else {
-      toast({title : 'Sign up failed. Please try again'})
+      navigate("/");
+    } else {
+      toast({ title: "Sign up failed. Please try again" });
     }
   }
 
@@ -72,10 +67,6 @@ const SigninForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col mt-2 w-full gap-4 "
       >
-       
-
-     
-
         <FormField
           control={form.control}
           name="email"
@@ -90,7 +81,7 @@ const SigninForm = () => {
                   {...field}
                 />
               </FormControl>
-              
+
               <FormMessage />
             </FormItem>
           )}
@@ -110,7 +101,7 @@ const SigninForm = () => {
                   {...field}
                 />
               </FormControl>
-              
+
               <FormMessage />
             </FormItem>
           )}
