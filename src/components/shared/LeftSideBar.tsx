@@ -1,47 +1,78 @@
-import { useUserContext } from '@/context/AuthContext';
-import { useSignOutAccount } from '@/lib/react-query/queriesAndMutations';
-import { useEffect } from 'react';
+import { useUserContext } from "@/context/AuthContext";
+import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
+import { useEffect, useState } from "react";
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { IoIosLogOut } from "react-icons/io";
 
 const LeftSideBar = () => {
-  const {mutate: signOut, isSuccess} = useSignOutAccount();
+  const { mutate: signOut, isSuccess } = useSignOutAccount();
   const navigate = useNavigate();
-  const {user} = useUserContext();
+  const { user } = useUserContext();
+  const {pathname} = useLocation()
+  // const [isActive,setIsActive] =useState(false)
 
   useEffect(() => {
-      if(isSuccess) navigate("/sign-in")
-  },[isSuccess])
+    if (isSuccess) navigate("/sign-in");
+  }, [isSuccess]);
 
   return (
-    <nav className='leftsidebar  hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-gray-900'>
-      <div className='flex flex-col gap-11'>
-      <Link to="/" className="">
-                <span 
-                className="text-lg font-[900] text-violet-400"
-                >PET VERSE</span>
-                {/* <img 
+    <nav className="  hidden md:flex px-6 py-10 flex-col  min-w-[270px] bg-gray-900 h-screen">
+      <div className="relative flex flex-col gap-11 h-full w-full">
+        <Link to="/" className="">
+          <span className="text-lg font-[900] text-violet-400">PET VERSE</span>
+          {/* <img 
                 className="rounded-full w-20"
                 src="/assets/cat3.png"
                 alt="logo"
                 
                  /> */}
-            </Link>
+        </Link>
 
-            <Link to={`/profile/${user.id}`}
-            className='flex items-center gap-4'>
-              <img 
-              src={user.imageUrl}
-              className="h-10  rounded-full"
-              alt='profile' />
-              <div className='flex flex-col'>
-                <p className='font-bold text-md'>{user.name}</p>
-                <p className='font-[100] text-sm'>@{user.username}</p>
-              </div>
-            </Link>
+         
+                 
+        <Link to={`/profile/${user.id}`} className="flex items-center gap-6 justify-center">
+          <img
+            src={user.imageUrl}
+            className="h-10  rounded-full"
+            alt="profile"
+          />
+          <div className="flex flex-col">
+            <p className="font-bold text-md">{user.name}</p>
+            <p className="font-[100] text-sm">@{user.username}</p>
+          </div>
+        </Link>
+
+        <ul className="flex flex-col gap-8 h-full">
+          <li className={`w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/' && 'bg-violet-300 text-gray-800'} `}>
+            <NavLink className='' to="/">Home</NavLink>
+          </li>
+          <li className={`w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/create-post' && 'bg-violet-300 text-gray-800'} `}>
+            <NavLink className='' to="/create-post">Create Post</NavLink>
+          </li>
+          <li className={`w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/explore' && 'bg-violet-300 text-gray-800'} `}>
+            <NavLink className='' to="/explore">Explore</NavLink>
+          </li>
+          <li className={`w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/all-users' && 'bg-violet-300 text-gray-800'} `}>
+            <NavLink className='' to="/all-users">People</NavLink>
+          </li>
+          <li className={`w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/saved' && 'bg-violet-300 text-gray-800'} `}>
+            <NavLink className='' to="/saved">Saved</NavLink>
+          </li>
+        </ul>
+
+        <Button
+          variant="ghost"
+          className="flex gap-4 items-center absolute bottom-0 w-full"
+          onClick={() => signOut()}>
+          <IoIosLogOut className="font-extrabold" />
+          <span>Logout</span>
+        </Button>
+        
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default LeftSideBar
+export default LeftSideBar;
