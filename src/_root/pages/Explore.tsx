@@ -2,7 +2,12 @@ import React from 'react'
 
 const Explore = () => {
   return (
-    <div>Explore</div>
+    <div>
+      <h2>Explore</h2>
+      <img 
+      src={"./assets/tesla.webp"}
+      />
+    </div>
   )
 }
 

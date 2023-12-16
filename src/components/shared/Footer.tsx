@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { NavLink, useLocation } from 'react-router-dom'
 import { HiMiniHome } from "react-icons/hi2";
 import { MdExplore,MdCreateNewFolder } from "react-icons/md";
@@ -9,8 +9,8 @@ import { BsPeopleFill,BsSaveFill } from "react-icons/bs";
 const Footer = () => {
   const {pathname} = useLocation()
   return (
-    <div className='sticky bottom-0 md:hidden bg-black '>
-      <ul className="flex  gap-8 h-full">
+    <div className='fixed bottom-0 md:hidden bg-black w-full'>
+      <ul className="flex  sm:gap-8 h-full w-full">
           <li className={`flex flex-col gap-2 text-xs sm:text-sm w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-[10px] rounded-br-none rounded-bl-none py-2 text-center ${pathname === '/' && 'bg-violet-300 text-gray-800'} `}>
             <HiMiniHome />
             <NavLink className='' to="/">Home</NavLink>

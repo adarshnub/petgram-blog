@@ -47,7 +47,7 @@ const PostForm = ({post}) => {
 
   return (
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full max-w-5xl px-4 gap-2 text-black">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full max-w-5xl px-4 gap-2 text-black ">
       <FormField
         control={form.control}
         name="caption"
@@ -107,7 +107,7 @@ const PostForm = ({post}) => {
           </FormItem>
         )}
       />
-      <div className="w-full flex gap-4 mt-8">
+      <div className="w-full flex gap-4 mt-8 mb-16">
         <Button type="button" className="w-full hover:bg-gray-500">Cancel</Button>
         <Button type="submit" className="w-full bg-violet-400 text-black hover:text-white hover:bg-red-700">Post</Button>
       </div>
