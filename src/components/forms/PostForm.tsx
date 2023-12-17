@@ -56,6 +56,7 @@ const PostForm = ({ post,action }: PostFormProps) => {
     // ✅ This will be type-safe and validated.
 
     //action = create
+    
     const newPost =  createPost({
       ...values,
       userId:user.id,
@@ -64,10 +65,14 @@ const PostForm = ({ post,action }: PostFormProps) => {
       toast({
         title:`${action} post failed. Try again`
       })
-      navigate('/');
+     
     }
-
+    toast({
+      title: `${action} post successfull`
+    })
+    navigate('/');
     console.log(values);
+  
   }
 
   return (
