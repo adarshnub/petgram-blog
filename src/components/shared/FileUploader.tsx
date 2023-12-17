@@ -1,5 +1,6 @@
 import  { useCallback, useState } from "react";
 import { useDropzone, FileWithPath } from "react-dropzone";
+import { Button } from "../ui/button";
 
 
 type FileUploaderProps = {
@@ -32,8 +33,13 @@ const FileUploader = ({fieldChange, mediaUrl}: FileUploaderProps) => {
             src={isFileSelected}/>
         </div>
       ) : (
-        <div className="bg-gray-700 min-h-[14rem]  items-center flex justify-center ">
-            <p>Drag 'n' drop file here</p>
+        <div className="bg-gray-700 min-h-[14rem] text-sm items-center flex flex-col justify-center ">
+            <p>Drag 'n' drop image here</p>
+            <span>or</span>
+            <Button
+            className="hover:bg-violet-400 hover:text-black hover:font-bold">
+                Click to Upload Image
+            </Button>
         </div>
       )}
     </div>

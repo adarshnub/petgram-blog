@@ -17,8 +17,8 @@ export const SignInValidation = z.object({
 });
 
 export const PostValidation = z.object({
-  caption: z.string().min(1).max(2200),
+  caption: z.string().min(1,{message:"Give a caption to your post"}).max(2200),
   file: z.custom<File[]>(),
   location: z.string().min(2).max(100),
-  tags: z.string()
+  tags: z.string().min(1, {message: "At atleast one tag"})
 });

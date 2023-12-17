@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
@@ -56,7 +57,7 @@ const PostForm = ({ post }:any) => {
                 <Textarea placeholder="Description" {...field} />
               </FormControl>
 
-              {/* <FormMessage /> */}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -82,11 +83,11 @@ const PostForm = ({ post }:any) => {
             <FormItem>
               <FormLabel className="text-white">Location</FormLabel>
               <FormControl>
-                {/* <Textarea placeholder="shadcn" {...field} /> */}
+                
                 <Input type="text" {...field} />
               </FormControl>
 
-              {/* <FormMessage /> */}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -105,17 +106,17 @@ const PostForm = ({ post }:any) => {
                 />
               </FormControl>
 
-              {/* <FormMessage /> */}
+              <FormMessage />
             </FormItem>
           )}
         />
         <div className="w-full flex gap-4 mt-8 mb-16">
-          <Button type="button" className="w-full hover:bg-gray-500">
+          <Button type="button" className="w-full hover:bg-gray-500 hover:font-bold">
             Cancel
           </Button>
           <Button
             type="submit"
-            className="w-full bg-violet-400 text-black hover:text-white hover:bg-red-700"
+            className="w-full bg-violet-400 text-black hover:text-white hover:bg-red-700 hover:font-bold"
           >
             Post
           </Button>
