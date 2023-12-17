@@ -1,6 +1,6 @@
 import { INewUser } from "@/types";
 import { ID, Query } from "appwrite";
-import { account, appwriteConfig, avatars, databases } from "./config";
+import { account, appwriteConfig, avatars, databases, storage } from "./config";
 
 
 //create new user account
@@ -99,5 +99,106 @@ export async function signOutAccount() {
         return session;
     } catch (error) {
         console.log(error);
+    }
+}
+
+
+//creating post
+export type INewPost = {
+    userId: string;
+    caption: string;
+    file: File[];
+    location? : string;
+    tags? : string;
+}
+
+export async function UploadFile(file:File) {
+    try {
+        const uploadedFile = await storage.createFile(
+            appwriteConfig.storageId,
+            ID.unique(),
+            file,
+        )
+
+        return uploadedFile;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//get file url for Preview
+export function getFilePreview(fileId:string) {
+    try {
+        
+        const fileUrl = storage.getFilePreview(
+            appwriteConfig.storageId,
+            fileId,
+            2000,
+            2000,
+            'top',
+            100,
+        )
+
+        if(!fileUrl) throw Error;
+
+        return fileUrl;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//delete the file
+export async function deleteFile(fileId:string) {
+    try {
+      await  storage.deleteFile(appwriteConfig.storageId,fileId)
+
+      return {status : 'OK'};
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function createPost (post :INewPost) {
+    try {
+        
+        //upload file to appwrite
+        const uploadedFile = await UploadFile(post.file[0]);
+
+        if(!uploadedFile) throw Error;
+
+        //file URL
+        const fileUrl = getFilePreview(uploadedFile.$id);
+
+        if(!fileUrl) {
+            await deleteFile(uploadedFile.$id);
+            throw Error;
+        }
+
+        //convert tags to array
+        const tags = post.tags?.replace(/ /g,"").split(",") || [];
+
+        //create post
+        const newPost = await databases.createDocument(
+            appwriteConfig.databseId,
+            appwriteConfig.postCollectionId,
+            ID.unique(),
+            {
+                creator: post.userId,
+                caption:post.caption,
+                imageUrl:fileUrl,
+                location:post.location,
+                tags:tags,
+                imageId: uploadedFile.$id,
+            }
+        )
+
+        if(!newPost) {
+           await deleteFile(uploadedFile.$id)
+           throw Error;
+        }
+        return newPost;
+
+    } catch (error) {
+        console.log(error)
     }
 }

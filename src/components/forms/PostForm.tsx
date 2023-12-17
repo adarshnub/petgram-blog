@@ -14,6 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import FileUploader from "../shared/FileUploader";
 import { PostValidation } from "@/lib/validation";
+import { Models } from "appwrite";
+import { useCreatePost } from "@/lib/react-query/queriesAndMutations";
+import { useUserContext } from "@/context/AuthContext";
+import { useToast } from "../ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 // const formSchema = z.object({
 //     username: z.string().min(2, {
@@ -22,7 +27,18 @@ import { PostValidation } from "@/lib/validation";
 
 //   })
 
-const PostForm = ({ post }:any) => {
+type PostFormProps ={
+  post?: Models.Document;
+  action : 'Create' | 'Update'
+}
+
+const PostForm = ({ post,action }: PostFormProps) => {
+
+  const { mutateAsync: createPost, isLoading:isLoadingCreate} = useCreatePost();
+  const {user} = useUserContext();
+  const {toast} = useToast();
+  const navigate = useNavigate();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof PostValidation>>({
     resolver: zodResolver(PostValidation),
@@ -38,6 +54,19 @@ const PostForm = ({ post }:any) => {
   function onSubmit(values: z.infer<typeof PostValidation>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+
+    //action = create
+    const newPost =  createPost({
+      ...values,
+      userId:user.id,
+    })
+    if(!newPost){
+      toast({
+        title:`${action} post failed. Try again`
+      })
+      navigate('/');
+    }
+
     console.log(values);
   }
 
@@ -83,7 +112,6 @@ const PostForm = ({ post }:any) => {
             <FormItem>
               <FormLabel className="text-white">Location</FormLabel>
               <FormControl>
-                
                 <Input type="text" {...field} />
               </FormControl>
 
@@ -98,7 +126,6 @@ const PostForm = ({ post }:any) => {
             <FormItem>
               <FormLabel className="text-white">Tags</FormLabel>
               <FormControl>
-                {/* <Textarea placeholder="cats,dogs,anime..." {...field} /> */}
                 <Input
                   type="text"
                   {...field}
@@ -111,7 +138,10 @@ const PostForm = ({ post }:any) => {
           )}
         />
         <div className="w-full flex gap-4 mt-8 mb-16">
-          <Button type="button" className="w-full hover:bg-gray-500 hover:font-bold">
+          <Button
+            type="button"
+            className="w-full hover:bg-gray-500 hover:font-bold"
+          >
             Cancel
           </Button>
           <Button

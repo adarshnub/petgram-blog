@@ -81,7 +81,6 @@ const SigninForm = () => {
                   {...field}
                 />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -101,14 +100,17 @@ const SigninForm = () => {
                   {...field}
                 />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
         />
 
         <Button type="submit" className="font-bold">
-          {isUserLoading ? <div className="text-white">Loading...</div> : "Login"}
+          {isUserLoading ? (
+            <div className="text-white">Loading...</div>
+          ) : (
+            "Login"
+          )}
         </Button>
 
         <p className="text-sm text-gray-700 text-center mt-2">
