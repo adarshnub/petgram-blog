@@ -202,3 +202,16 @@ export async function createPost (post :INewPost) {
         console.log(error)
     }
 }
+
+
+//get recent post 
+
+export async function getRecentPosts() {
+    const posts = await databases.listDocuments(
+        appwriteConfig.databseId,
+        appwriteConfig.postCollectionId,
+        [Query.orderDesc(`$createdAt`), Query.limit(20)]
+    )
+    if(!posts) throw Error;
+    return posts; 
+}
