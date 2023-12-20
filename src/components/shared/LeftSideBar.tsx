@@ -69,6 +69,10 @@ const LeftSideBar = () => {
           <BsSaveFill />
             <NavLink className='' to="/saved">Saved</NavLink>
           </li>
+          <li className={`pl-8 flex gap-8 w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/create-post' && 'bg-violet-300 text-gray-800'} `}>
+          <MdCreateNewFolder />
+            <NavLink className='' to="/blog">Blog</NavLink>
+          </li>
         </ul>
 
         <Button

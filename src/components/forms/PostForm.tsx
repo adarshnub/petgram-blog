@@ -20,6 +20,7 @@ import { useUserContext } from "@/context/AuthContext";
 import { useToast } from "../ui/use-toast";
 import { useNavigate } from "react-router-dom";
 
+
 // const formSchema = z.object({
 //     username: z.string().min(2, {
 //       message: "Username must be at least 2 characters.",
@@ -76,10 +77,10 @@ const PostForm = ({ post,action }: PostFormProps) => {
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col w-full max-w-5xl px-4 gap-2 text-black "
+        className="flex flex-col w-full max-w-5xl px-4 gap-2 text-black bg-gray-800 rounded-lg"
       >
         <FormField
           control={form.control}
@@ -155,6 +156,7 @@ const PostForm = ({ post,action }: PostFormProps) => {
           >
             Post
           </Button>
+          {/* <TailwindButton /> */}
         </div>
       </form>
     </Form>

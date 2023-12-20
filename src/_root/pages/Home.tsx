@@ -1,4 +1,5 @@
 import PostCard from "@/components/shared/PostCard";
+import TailwindCard from "@/components/shared/TailwindCard";
 import { useGetRecentPosts } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
 
@@ -10,6 +11,7 @@ const Home = () => {
 
 
   return (
+    <TailwindCard>
     <div className='text-white flex flex-1 container w-full mx-auto'>
       <div className="flex flex-col  w-full">
         <h1 className="font-bold text-start">Latest Feeds</h1>
@@ -26,6 +28,7 @@ const Home = () => {
         }
       </div>
     </div>
+    </TailwindCard>
   )
 }
 

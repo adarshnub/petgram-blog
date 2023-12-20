@@ -12,6 +12,8 @@ import CreatePost from "./_root/pages/CreatePost";
 import AllUsers from "./_root/pages/AllUsers";
 import Saved from "./_root/pages/Saved";
 import Explore from "./_root/pages/Explore";
+import Profile from "./components/shared/Profile";
+import Blog from "./_root/pages/Blog";
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
           <Route path='/explore' element={<Explore />} />
           <Route path='/all-users' element={<AllUsers />} />
           <Route path='/saved' element={<Saved />} />
+          <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/blog' element={<Blog />} />
         </Route>
       </Routes>
 
