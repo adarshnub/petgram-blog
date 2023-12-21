@@ -1,4 +1,4 @@
-import { useUserContext } from "@/context/AuthContext";
+
 import { Models } from "appwrite";
 
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ const PostCard = ({ post }: PostCardProps) => {
   return (
     <div className="bg-gray-800 bg-transparent shadow-2xl rounded-lg py-4 ">
       <div className="flex flex-col gap-8">
-        <div className="">
+        
             {/* <div className="absolute top-0 w-full  bg-red-400"></div> */}
           <Link
             to={`/profile/${post.creator.$id}`}
@@ -35,12 +35,12 @@ const PostCard = ({ post }: PostCardProps) => {
             className="w-[40rem] max-h-[35rem]"/>
             <h2 className="text-start px-7">{post?.caption}</h2>
           </div>
-          <div className="flex justify-between px-7">
+          <div className="flex justify-between px-7 max-w-[40rem]">
             <h1>Like</h1>
             <p>Comment</p>
             <h1>Save</h1>
           </div>
-        </div>
+        
       </div>
     </div>
   );
