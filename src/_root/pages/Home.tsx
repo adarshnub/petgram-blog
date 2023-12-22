@@ -26,7 +26,7 @@ const Home = () => {
             {isPostLoading && !posts ? (
               "Loading..."
             ) : (
-              <ul className="flex flex-col gap-8 w-full">
+              <ul className="flex flex-col gap-8 w-full ">
                 {posts?.documents.map((post: Models.Document) => (
                   <PostCard post={post} />
                 ))}
@@ -35,13 +35,13 @@ const Home = () => {
           </div>
         </div>
 
-        <div 
+        {/* <div 
         className="hidden lg:flex w-1/3 mx-auto rounded-2xl mt-[5.5rem] max-h-[36rem] h-[22rem]">
         <SideCarouselWrapper>
           <SideCarousel />
           
         </SideCarouselWrapper>
-        </div>
+        </div> */}
         
       </div>
     </TailwindCard>

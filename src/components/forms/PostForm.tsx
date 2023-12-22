@@ -15,27 +15,24 @@ import { Textarea } from "../ui/textarea";
 import FileUploader from "../shared/FileUploader";
 import { PostValidation } from "@/lib/validation";
 import { Models } from "appwrite";
-import { useCreatePost } from "@/lib/react-query/queriesAndMutations";
+import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 import { useToast } from "../ui/use-toast";
 import { useNavigate } from "react-router-dom";
 
 
-// const formSchema = z.object({
-//     username: z.string().min(2, {
-//       message: "Username must be at least 2 characters.",
-//     }),
 
-//   })
 
-type PostFormProps ={
+export type PostFormProps ={
   post?: Models.Document;
-  action : 'Create' | 'Update'
+  action : 'Create' | 'Update';
 }
 
 const PostForm = ({ post,action }: PostFormProps) => {
 
-  const { mutateAsync: createPost, isLoading:isLoadingCreate} = useCreatePost();
+  const { mutateAsync: createPost, isPending:isLoadingCreate} = useCreatePost();
+  const { mutateAsync: updatePost, isPending:isLoadingUpdate} = useUpdatePost();
+
   const {user} = useUserContext();
   const {toast} = useToast();
   const navigate = useNavigate();
@@ -52,13 +49,28 @@ const PostForm = ({ post,action }: PostFormProps) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof PostValidation>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    async function onSubmit(values: z.infer<typeof PostValidation>) {
+ 
+    //action = update
+    if(post && action === "Update") {
+      const updatedPost = await  updatePost({
+        ...values,
+        postId:post.$id,
+        imageId:post.imageId ,
+        imageUrl: post.imageUrl ,
+      })
+      console.log(values),"valuesData";
+      console.log("updatedPostData",updatedPost)
+      if(!updatedPost) {
+        toast({ title: `${action} post failed`})
+      }
+      return navigate('/')
+    }
+
 
     //action = create
     
-    const newPost =  createPost({
+    const newPost = await createPost({
       ...values,
       userId:user.id,
     })
@@ -153,8 +165,8 @@ const PostForm = ({ post,action }: PostFormProps) => {
           <Button
             type="submit"
             className="w-full bg-violet-400 text-black hover:text-white hover:bg-red-700 hover:font-bold"
-          >
-            Post
+          >{(isLoadingCreate || isLoadingUpdate) && "Loading..."}
+            {action} Post
           </Button>
           {/* <TailwindButton /> */}
         </div>
