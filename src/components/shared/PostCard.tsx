@@ -4,6 +4,7 @@ import { Models } from "appwrite";
 import { BiSolidEdit } from "react-icons/bi";
 
 import { Link } from "react-router-dom";
+import PostStats from "./PostStats";
 
 type PostCardProps = {
   post: Models.Document;
@@ -45,12 +46,12 @@ const PostCard = ({ post }: PostCardProps) => {
             className="w-[40rem] max-h-[25rem]"/>
             <h2 className="text-start text-lg px-7">{post?.caption}</h2>
           </div>
-          <div className="flex justify-between px-7 max-w-[30rem] text-sm">
+          {/* <div className="flex justify-between px-7 max-w-[30rem] text-sm">
             <h1>Like</h1>
             <p>Comment</p>
             <h1>Save</h1>
-          </div>
-        
+          </div> */}
+        <PostStats post={post} userId={user.id} />
       </div>
     </div>
   );

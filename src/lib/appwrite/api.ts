@@ -147,7 +147,7 @@ export function getFilePreview(fileId:string) {
     }
 }
 
-//delete the file
+//delete the file (inCase of error uploading)
 export async function deleteFile(fileId:string) {
     try {
       await  storage.deleteFile(appwriteConfig.storageId,fileId)
@@ -158,6 +158,7 @@ export async function deleteFile(fileId:string) {
     }
 }
 
+//create post
 export async function createPost (post :INewPost) {
     try {
         
@@ -303,5 +304,24 @@ export async function updatePost(post:IUpdatePost) {
     } catch (error) {
         console.error(error);
         throw error;
+    }
+}
+
+//like-unlike post
+export async function likePost (postId:string,likesArray:string[]) {
+    try {
+        const updatedPost = await databases.updateDocument(
+            appwriteConfig.databseId,
+            appwriteConfig.postCollectionId,
+            postId,
+            {
+                likes:likesArray,
+            },
+        )
+        if(!updatedPost) throw Error;
+
+        return updatedPost;
+    } catch (error) {
+        console.log(error);
     }
 }

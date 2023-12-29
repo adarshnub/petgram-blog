@@ -11,9 +11,11 @@ import {
   createUserAccount,
   getPostById,
   getRecentPosts,
+  likePost,
   signInAccount,
   signOutAccount,
   updatePost,
+  
 } from "../appwrite/api";
 import { INewUser } from "@/types";
 import { QUERY_KEYS } from "./queryKeys";
@@ -84,3 +86,25 @@ export const useUpdatePost = () => {
     },
   });
 };
+
+//like-post
+export const useLikePost = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({
+            postId,
+            likesArray
+        }:{
+            postId:string;
+             likesArray:string[];
+            }) => likePost(postId,likesArray),
+            onSuccess: (data) => {
+                queryClient.invalidateQueries({queryKey: [QUERY_KEYS.GET_POST_BY_ID,data?.$id]});
+                queryClient.invalidateQueries({ queryKey:[QUERY_KEYS.GET_RECENT_POSTS]});
+                queryClient.invalidateQueries({ queryKey:[QUERY_KEYS.GET_CURRENT_UER]});
+                queryClient.invalidateQueries({ queryKey:[QUERY_KEYS.GET_POSTS]});
+
+            }
+    })
+}
