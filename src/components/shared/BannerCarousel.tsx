@@ -18,7 +18,7 @@ const BannerCarousel = () => {
               />
               <div className={styles.textOverlay}>
                 <p className="text-[2rem]  md:text-[4rem]">Premium</p>
-                <p className="text-[2rem] md:text-[4rem]"> - Tees</p>
+                <p className="text-[2rem] md:text-[4rem]"> - Content1</p>
               </div>
             </div>
           ),
@@ -32,8 +32,8 @@ const BannerCarousel = () => {
                 className="object-center w-full "
               />
               <div className={styles.textOverlay}>
-                <p className="text-[2rem] md:text-[4rem]">Premium Zip</p>
-                <p className="text-[2rem] md:text-[4rem]">Hoodies</p>
+                <p className="text-[2rem] md:text-[4rem]">Premium </p>
+                <p className="text-[2rem] md:text-[4rem]">Content2</p>
               </div>
             </div>
           ),
@@ -48,7 +48,7 @@ const BannerCarousel = () => {
               />
               <div className={styles.textOverlay}>
                 <p className="text-[2rem] md:text-[4rem]">Heritage</p>
-                <p className="text-[2rem] md:text-[4rem]"> - Tees</p>
+                <p className="text-[2rem] md:text-[4rem]"> - Content3</p>
               </div>
             </div>
           ),
@@ -63,7 +63,7 @@ const BannerCarousel = () => {
               />
               <div className={styles.textOverlay}>
                 <p className="text-[2rem] md:text-[4rem]">Heritage</p>
-                <p className="text-[2rem] md:text-[4rem]"> - Tees</p>
+                <p className="text-[2rem] md:text-[4rem]"> - Content4</p>
               </div>
             </div>
           ),
