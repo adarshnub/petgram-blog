@@ -15,7 +15,7 @@ const Navbar = () => {
     },[isSuccess])
 
   return (
-    <section className='sticky top-0 md:hidden bg-black w-full shadow-xl'>
+    <section className='sticky top-0 z-30 md:hidden bg-black w-full shadow-xl'>
         <div className="flex justify-between px-5 py-4">
             <Link to="/" className="">
                 <span 

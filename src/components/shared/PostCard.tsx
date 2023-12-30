@@ -16,22 +16,23 @@ const PostCard = ({ post }: PostCardProps) => {
   if(!post.creator) return;
 
   return (
-    <div className="bg-gray-800  shadow-2xl rounded-lg py-4 max-w-[30rem] h-[38rem]">
+    <div className="bg-gray-800  shadow-2xl rounded-lg py-4 max-w-[30rem] md:h-[38rem]">
       <div className="flex flex-col gap-8">
         
             {/* <div className="absolute top-0 w-full  bg-red-400"></div> */}
             <div className="flex justify-between px-2">
           <Link
             to={`/profile/${post.creator.$id}`}
-            className=" shadow-xl w-full flex gap-4 py-2 px-2 items-center  h-[4rem]"
+            className=" shadow-xl w-full flex gap-4 py-2 px-2 items-center "
           >
             <img
-              className="rounded-full w-12 h-12 "
+              className="rounded-full w-8 h-8 "
               src={post?.creator?.imageUrl}
             />
-            <div className="flex flex-col ">
-              <h3 className="text-gray-300 text-[18px]">{post?.creator?.name}</h3>
-              <p className="text-gray-400 text-[14px]">{post?.creator.username}</p>
+            <div className="flex flex-col text-start">
+              <h3 className="text-gray-300 text-[12px]">{post?.creator?.name}</h3>
+              {/* <p className="text-gray-400 text-[10px]">{post?.creator.username}</p> */}
+              <p className="text-gray-400 text-[10px]">{post?.location}</p>
             </div>
           </Link>
           <Link to={`/update-post/${post.$id}`}
@@ -44,14 +45,15 @@ const PostCard = ({ post }: PostCardProps) => {
           <div>
             <img src={post.imageUrl} 
             className="w-[40rem] max-h-[25rem]"/>
-            <h2 className="text-start text-lg px-7">{post?.caption}</h2>
+            <div className="flex w-full px-2 pt-2">
+            <h3 className="text-gray-300 text-sm font-semibold">{post?.creator?.name}</h3> 
+            <p className="text-start text-sm font-light px-2">{post?.caption}</p>
+            </div>
           </div>
-          {/* <div className="flex justify-between px-7 max-w-[30rem] text-sm">
-            <h1>Like</h1>
-            <p>Comment</p>
-            <h1>Save</h1>
-          </div> */}
+          <div className="flex justify-between md:px-7  text-sm">
+        
         <PostStats post={post} userId={user.id} />
+          </div>
       </div>
     </div>
   );
