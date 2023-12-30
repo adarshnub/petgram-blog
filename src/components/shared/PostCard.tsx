@@ -28,7 +28,7 @@ const PostCard = ({ post }: PostCardProps) => {
   if (!post.creator) return;
 
   return (
-    <div className="bg-gray-800  shadow-2xl rounded-lg py-4 max-w-[30rem] container ">
+    <div className="bg-gray-800  shadow-2xl rounded-lg py-4 max-w-[30rem] ">
       <div className="flex flex-col gap-2">
         {/* <div className="absolute top-0 w-full  bg-red-400"></div> */}
         <div className="flex justify-between px-2">
@@ -56,19 +56,19 @@ const PostCard = ({ post }: PostCardProps) => {
           </Link>
         </div>
 
-        <div>
+        <div className="container">
           <img src={post.imageUrl} className="w-[40rem] max-h-[25rem]" />
         </div>
         <div className="flex justify-between md:px-7 pt-2 text-sm">
           <PostStats post={post} userId={user.id} />
         </div>
-        <div className="flex w-full px-2 ">
+        <div className="flex w-full  container mx-auto">
           <h3 className="text-gray-300 text-sm font-semibold">
             {post?.creator?.username}
           </h3>
           <p className="text-start text-sm font-light px-2">{post?.caption}</p>
         </div>
-        <div className="text-gray-400 text-sm text-start pl-2 ">
+        <div className="text-gray-400 text-sm text-start container mx-auto">
           {/* <p className="text-[13px] font-normal">View all comments</p> */}
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
