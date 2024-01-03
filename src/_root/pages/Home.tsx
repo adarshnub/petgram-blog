@@ -4,6 +4,10 @@ import SideCarousel from "@/components/shared/SideCarousel";
 import SideCarouselWrapper from "@/components/shared/SideCarouselWrapper";
 import TailwindCard from "@/components/shared/TailwindCard";
 
+//shadcn
+import { Skeleton } from "@/components/ui/skeleton"
+
+
 import { useGetRecentPosts } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
 
@@ -24,7 +28,16 @@ const Home = () => {
           <div className="flex flex-col  w-full">
             <h1 className="font-bold text-start">Latest Feeds</h1>
             {isPostLoading && !posts ? (
-              "Loading..."
+              <>
+              <div className="flex gap-4 mb-5">
+              <Skeleton 
+              className=" w-14  rounded-full" />
+              <Skeleton 
+              className=" w-[25.5rem] h-[4rem] rounded-full" />
+              </div>
+              <Skeleton 
+              className=" max-w-[30rem] h-[40rem] rounded-xl" />
+              </>  
             ) : (
               <ul className="flex flex-col gap-8 w-full ">
                 {posts?.documents.map((post: Models.Document) => (

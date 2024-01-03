@@ -20,6 +20,7 @@ import {
 import { INewUser } from "@/types";
 import { QUERY_KEYS } from "./queryKeys";
 
+
 //user queries
 export const useCreateUserAccount = () => {
   return useMutation({
@@ -39,6 +40,13 @@ export const useSignOutAccount = () => {
     mutationFn: signOutAccount,
   });
 };
+
+///////////////message queries
+
+//create message
+export const useCreateMessage = () => {
+ 
+}
 
 ////////post queries
 
