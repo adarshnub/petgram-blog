@@ -1,16 +1,14 @@
 import TailwindButton from "@/components/shared/TailwindButton"
 import TailwindCard from "@/components/shared/TailwindCard"
+import ChatRoom from "./ChatRoom"
 
 
 const Explore = () => {
   return (
-    <TailwindCard >
-     <div className="flex flex-col items-center gap-28">
-     <h2>Explore</h2>
-     
-     <TailwindButton>Explore</TailwindButton>
-     </div>
-    </TailwindCard>
+    <>
+    <ChatRoom />
+   </>
+
   )
 }
 

@@ -102,9 +102,7 @@ export async function signOutAccount() {
     }
 }
 
-////////////////////////////////messages API
 
-//creating message
 
 
 
@@ -164,11 +162,20 @@ export async function deleteFile(fileId:string) {
         console.log(error)
     }
 }
+
+
+////////////////////////////////messages API
+
+//creating message
 // type INewMessage = {
 //     content:string
 // }
 
-// export async function createMessage(message :INewMessage) {}
+// export async function createMessage(message :INewMessage) {
+    
+// }
+
+
 //create post
 export async function createPost (post :INewPost) {
     try {

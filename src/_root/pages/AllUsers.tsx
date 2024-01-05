@@ -1,14 +1,18 @@
-import TailwindCard from "@/components/shared/TailwindCard"
+
+
+
 
 
 
 const AllUsers  = () => {
   return (
     
-      <TailwindCard >
-        <div>users</div>
+      
+        <>
+         coming soon....
+        </>
 
-      </TailwindCard>
+    
     
   )
 }
