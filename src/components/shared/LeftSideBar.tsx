@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import { IoIosLogOut } from "react-icons/io";
 import { HiMiniHome } from "react-icons/hi2";
 import { MdExplore,MdCreateNewFolder } from "react-icons/md";
-
+import { SiGooglechat } from "react-icons/si";
 import { BsPeopleFill,BsSaveFill } from "react-icons/bs";
 
 const LeftSideBar = () => {
@@ -58,8 +58,8 @@ const LeftSideBar = () => {
             <NavLink className='' to="/create-post">Create Post</NavLink>
           </li>
           <li className={`pl-8 flex gap-8 w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/explore' && 'bg-violet-300 text-gray-800'} `}>
-          <MdExplore />
-            <NavLink className='' to="/explore">Explore</NavLink>
+          <SiGooglechat />
+            <NavLink className='' to="/explore">Community</NavLink>
           </li>
           <li className={`pl-8 flex gap-8 w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/all-users' && 'bg-violet-300 text-gray-800'} `}>
           <BsPeopleFill />
@@ -69,10 +69,10 @@ const LeftSideBar = () => {
           <BsSaveFill />
             <NavLink className='' to="/saved">Saved</NavLink>
           </li>
-          <li className={`pl-8 flex gap-8 w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/create-post' && 'bg-violet-300 text-gray-800'} `}>
+          {/* <li className={`pl-8 flex gap-8 w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/create-post' && 'bg-violet-300 text-gray-800'} `}>
           <MdCreateNewFolder />
             <NavLink className='' to="/blog">Blog</NavLink>
-          </li>
+          </li> */}
         </ul>
 
         <Button
