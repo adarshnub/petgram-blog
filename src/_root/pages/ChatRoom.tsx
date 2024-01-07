@@ -16,18 +16,27 @@ export const formatTimestamp = (timestamp:string) => {
 const ChatRoom = () => {
     const [messages,setMessages] = useState<any[]>([]);
     const [messageBody,setMessageBody] = useState('');
-    const chatContainerRef = useRef<HTMLDivElement>(null)
+    // const chatContainerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         getMessages()
-    },[])
+    },[]);
+
+    useEffect(() => {
+        const scrollableDiv = document.getElementById('scrollableDiv');
+        if (scrollableDiv) {
+          scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+          console.log(scrollableDiv,'scrolling')
+        }
+      }, [messages]);
+    
 
     const getMessages = async() => {
         const response = await databases.listDocuments(
             appwriteConfig.databseId,
             appwriteConfig.messagesCollectionId,
             [
-                Query.orderAsc('$createdAt'),
+                // Query.orderAsc('$createdAt'),
                 Query.limit(50)
             ]
              );
@@ -55,7 +64,14 @@ const ChatRoom = () => {
             
         setMessageBody('')
     }
+    
+//     const scrollableDiv: HTMLDivElement | null = document.getElementById('scrollableDiv')  as HTMLDivElement | null;
 
+//   // Check if the element exists before manipulating it
+//   if (scrollableDiv) {
+//     // Automatically scroll to the bottom
+//     scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+//   }
   
     
   return (
@@ -64,14 +80,14 @@ const ChatRoom = () => {
         <div className='flex flex-col gap-4 border rounded-lg p-2  w-full relative'>
           
             {/* //////////code seperation//////////// */}
-            <div
-            className='flex flex-col gap-4 overflow-auto h-[70vh] md:h-[70vw]'>
+            <div id="scrollableDiv"
+            className='flex flex-col gap-4 overflow-y-auto h-[70vh] md:h-[70vw] '>
             {messages.map(message => (
                 <div
                 key={message.$id} 
                 className="flex items-start justify-start gap-2.5">
                 <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="Jese image" />
-                   <div className="inline-block    h-full leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700  overflow-x-hidden">
+                   <div className="inline-block    h-full leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700  overflow-x-hidden max-w-[400px] xl:max-w-[800px]">
                       <div className="flex items-center space-x-2 rtl:space-x-reverse justify-between ">
                          <span className="text-sm font-semibold text-gray-900 dark:text-white ">Bonnie Green</span>
                          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{formatTimestamp(message.$createdAt)}</span>
@@ -113,4 +129,7 @@ const ChatRoom = () => {
   )
 }
 
-export default ChatRoom
+export default ChatRoom;
+
+
+//h-[70vh] md:h-[70vw] 
