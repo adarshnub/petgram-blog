@@ -1,7 +1,6 @@
 import BannerCarousel from "@/components/shared/BannerCarousel";
 import PostCard from "@/components/shared/PostCard";
-import SideCarousel from "@/components/shared/SideCarousel";
-import SideCarouselWrapper from "@/components/shared/SideCarouselWrapper";
+
 import TailwindCard from "@/components/shared/TailwindCard";
 
 //shadcn

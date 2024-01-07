@@ -1,7 +1,7 @@
 
 import { NavLink, useLocation } from 'react-router-dom'
 import { HiMiniHome } from "react-icons/hi2";
-import { MdExplore,MdCreateNewFolder } from "react-icons/md";
+import { MdCreateNewFolder } from "react-icons/md";
 import { SiGooglechat } from "react-icons/si";
 import { BsPeopleFill,BsSaveFill } from "react-icons/bs";
 
