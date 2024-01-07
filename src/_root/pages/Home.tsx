@@ -1,11 +1,10 @@
 import BannerCarousel from "@/components/shared/BannerCarousel";
 import PostCard from "@/components/shared/PostCard";
+import Lottie from "lottie-react";
 
 import TailwindCard from "@/components/shared/TailwindCard";
 
-//shadcn
-import { Skeleton } from "@/components/ui/skeleton"
-
+import loadinghand from '../../animations/loadinghand.json'
 
 import { useGetRecentPosts } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
@@ -28,19 +27,12 @@ const Home = () => {
             <h1 className="font-bold text-start">Latest Feeds</h1>
             {isPostLoading && !posts ? (
               <>
-              <div className="flex gap-4 mb-5">
-              <Skeleton 
-              className=" w-14  rounded-full" />
-              <Skeleton 
-              className=" w-[25.5rem] h-[4rem] rounded-full" />
-              </div>
-              <Skeleton 
-              className=" max-w-[30rem] h-[40rem] rounded-xl" />
+               <Lottie animationData={loadinghand}  />
               </>  
             ) : (
               <ul className="flex flex-col gap-8 w-full ">
                 {posts?.documents.map((post: Models.Document) => (
-                  <PostCard post={post} />
+                  <PostCard key={post.$id} post={post} />
                 ))}
               </ul>
             )}
