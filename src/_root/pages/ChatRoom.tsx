@@ -1,5 +1,5 @@
 import { appwriteConfig, databases } from '@/lib/appwrite/config';
-import React, { useEffect, useRef, useState } from 'react';
+import  { useEffect,  useState } from 'react';
 import {ID, Query} from 'appwrite';
 
 import { BsFillSendFill } from "react-icons/bs";
