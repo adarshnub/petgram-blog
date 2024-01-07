@@ -72,7 +72,7 @@ export const useGetRecentPosts = () => {
   });
 };
 
-//get post by useer_id
+//get post by post_id
 export const useGetPostById = (postId?: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],

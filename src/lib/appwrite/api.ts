@@ -166,14 +166,7 @@ export async function deleteFile(fileId:string) {
 
 ////////////////////////////////messages API
 
-//creating message
-// type INewMessage = {
-//     content:string
-// }
 
-// export async function createMessage(message :INewMessage) {
-    
-// }
 
 
 //create post
