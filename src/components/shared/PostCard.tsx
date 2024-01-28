@@ -56,7 +56,7 @@ const PostCard = ({ post }: PostCardProps) => {
           </Link>
         </div>
 
-        <Link to="post-details/:id" className="container">
+        <Link to={`posts/${post.$id}`} className="container">
           <img src={post.imageUrl} className="w-[40rem] max-h-[25rem]" />
         </Link>
         <div className="flex justify-between md:px-7 pt-2 text-sm">

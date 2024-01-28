@@ -21,7 +21,7 @@ const GridPostList = ({posts ,showUser=true}:GridPostListProps) => {
         {
             posts.map((post) => (
                 <li key={post.$id} className="relative min-w-80 h-80 rounded-[12px] border-4">
-                    <Link to="#">
+                    <Link to={`/posts/${post.$id}`}>
                         <img 
                           src={post.imageUrl}
                           alt="post"

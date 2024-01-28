@@ -31,7 +31,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:id' element={<EditPost />} />
-          <Route path='/post-details/:id' element={<PostDetails />} />
+          <Route path='/posts/:id' element={<PostDetails />} />
           <Route path='/explore' element={<Explore />} />
           <Route path='/all-users' element={<AllUsers />} />
           <Route path='/saved' element={<Saved />} />
