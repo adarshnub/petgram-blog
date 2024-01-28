@@ -15,6 +15,7 @@ import Explore from "./_root/pages/Explore";
 import Profile from "./components/shared/Profile";
 import Blog from "./_root/pages/Blog";
 import EditPost from "./_root/pages/EditPost";
+import PostDetails from "./_root/pages/PostDetails";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:id' element={<EditPost />} />
+          <Route path='/post-details/:id' element={<PostDetails />} />
           <Route path='/explore' element={<Explore />} />
           <Route path='/all-users' element={<AllUsers />} />
           <Route path='/saved' element={<Saved />} />

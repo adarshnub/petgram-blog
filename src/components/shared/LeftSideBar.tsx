@@ -25,7 +25,7 @@ const LeftSideBar = () => {
     <nav className="fixed  hidden md:flex   px-6 py-10 flex-col  min-w-[270px] bg-gray-900 h-screen">
       <div className=" flex flex-col gap-11 h-full w-full">
         <Link to="/" className="">
-          <span className="text-lg font-[900] text-violet-400">PET VERSE</span>
+          <span className="text-lg font-[900] text-violet-400">Wabble</span>
           {/* <img 
                 className="rounded-full w-20"
                 src="/assets/cat3.png"
@@ -67,7 +67,7 @@ const LeftSideBar = () => {
           </li>
           <li className={`pl-8 flex gap-8 w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/saved' && 'bg-violet-300 text-gray-800'} `}>
           <BsSaveFill />
-            <NavLink className='' to="/saved">Saved</NavLink>
+            <NavLink className='' to="/saved">Explore</NavLink>
           </li>
           {/* <li className={`pl-8 flex gap-8 w-full items-center hover:bg-violet-300 hover:text-gray-700 font-semibold rounded-md py-2 text-center ${pathname === '/create-post' && 'bg-violet-300 text-gray-800'} `}>
           <MdCreateNewFolder />

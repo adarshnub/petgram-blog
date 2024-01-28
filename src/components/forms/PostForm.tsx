@@ -15,7 +15,7 @@ import { Textarea } from "../ui/textarea";
 import FileUploader from "../shared/FileUploader";
 import { PostValidation } from "@/lib/validation";
 import { Models } from "appwrite";
-import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations";
+import { useCreatePost, useDeletePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 import { useToast } from "../ui/use-toast";
 import { useNavigate } from "react-router-dom";
@@ -32,6 +32,7 @@ const PostForm = ({ post,action }: PostFormProps) => {
 
   const { mutateAsync: createPost, isPending:isLoadingCreate} = useCreatePost();
   const { mutateAsync: updatePost, isPending:isLoadingUpdate} = useUpdatePost();
+  const { mutateAsync:deletePost,isPending:isLoadingDelete} = useDeletePost();
 
   const {user} = useUserContext();
   const {toast} = useToast();

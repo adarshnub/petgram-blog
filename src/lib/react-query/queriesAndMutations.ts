@@ -2,6 +2,7 @@ import {
   useQuery,
   useMutation,
   useQueryClient,
+  useInfiniteQuery,
   
 } from "@tanstack/react-query";
 import {
@@ -9,9 +10,12 @@ import {
   IUpdatePost,
   createPost,
   createUserAccount,
+  deletePost,
+  getInfinitePosts,
   getPostById,
   getRecentPosts,
   likePost,
+  searchPosts,
   signInAccount,
   signOutAccount,
   updatePost,
@@ -43,10 +47,6 @@ export const useSignOutAccount = () => {
 
 ///////////////message queries
 
-//create message
-// export const useCreateMessage = () => {
- 
-// }
 
 ////////post queries
 
@@ -64,7 +64,7 @@ export const useCreatePost = () => {
   });
 };
 
-//get posts
+//get recent posts
 export const useGetRecentPosts = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
@@ -115,4 +115,42 @@ export const useLikePost = () => {
 
             }
     })
+}
+
+// delete -post
+export const useDeletePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn:({ postId,imageId}: {postId:string,imageId:string}) => deletePost(postId,imageId),
+    onSuccess: (data)=> {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+      })
+    }
+  })
+}
+
+// search-posts
+export const useSearchPosts = (searchTerm:string) => {
+  return useQuery({
+    queryKey:[QUERY_KEYS.SEARCH_POSTS],
+    queryFn: () => searchPosts(searchTerm),
+    enabled: !!searchTerm,
+  })
+}
+
+//get infinite post
+export const useGetInfinitePost = () => {
+  return useInfiniteQuery({
+    queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+    queryFn: getInfinitePosts,
+    getNextPageParam: (lastPage) => {
+      if(lastPage && lastPage.documents.length === 0) return null;
+
+      const lastId = lastPage?.documents[lastPage.documents.length-1].$id;
+
+      return lastId;
+    }
+
+  })
 }

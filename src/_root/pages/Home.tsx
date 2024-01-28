@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import TailwindCard from "@/components/shared/TailwindCard";
 
 import loadinghand from '../../animations/loadinghand.json'
+import { Slide } from "react-awesome-reveal";
 
 import { useGetRecentPosts } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
@@ -32,7 +33,11 @@ const Home = () => {
             ) : (
               <ul className="flex flex-col gap-8 w-full ">
                 {posts?.documents.map((post: Models.Document) => (
-                  <PostCard key={post.$id} post={post} />
+                  // <PostCard key={post.$id} post={post} />
+                  <div key={post.$id} >
+                     <PostCard  post={post} />
+                  </div>
+                  
                 ))}
               </ul>
             )}
