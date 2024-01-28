@@ -50,7 +50,7 @@ const PostDetails = () => {
             </div>
             <img
               src={post?.imageUrl}
-              className="rounded-b-[12px] object-cover h-80 lg:h-[480px] w-full md:max-w-5xl "
+              className="rounded-b-[12px] object-cover h-80 xl:h-[480px] w-full md:w-[1000px] "
             />
           </div>
 
