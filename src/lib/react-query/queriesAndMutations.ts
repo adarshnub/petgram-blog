@@ -3,7 +3,6 @@ import {
   useMutation,
   useQueryClient,
   useInfiniteQuery,
-  
 } from "@tanstack/react-query";
 import {
   INewPost,
@@ -19,11 +18,9 @@ import {
   signInAccount,
   signOutAccount,
   updatePost,
-  
 } from "../appwrite/api";
 import { INewUser } from "@/types";
 import { QUERY_KEYS } from "./queryKeys";
-
 
 //user queries
 export const useCreateUserAccount = () => {
@@ -46,7 +43,6 @@ export const useSignOutAccount = () => {
 };
 
 ///////////////message queries
-
 
 ////////post queries
 
@@ -97,47 +93,51 @@ export const useUpdatePost = () => {
 
 //like-post
 export const useLikePost = () => {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn: ({
-            postId,
-            likesArray
-        }:{
-            postId:string;
-             likesArray:string[];
-            }) => likePost(postId,likesArray),
-            onSuccess: (data) => {
-                queryClient.invalidateQueries({queryKey: [QUERY_KEYS.GET_POST_BY_ID,data?.$id]});
-                queryClient.invalidateQueries({ queryKey:[QUERY_KEYS.GET_RECENT_POSTS]});
-                queryClient.invalidateQueries({ queryKey:[QUERY_KEYS.GET_CURRENT_UER]});
-                queryClient.invalidateQueries({ queryKey:[QUERY_KEYS.GET_POSTS]});
-
-            }
-    })
-}
+  return useMutation({
+    mutationFn: ({
+      postId,
+      likesArray,
+    }: {
+      postId: string;
+      likesArray: string[];
+    }) => likePost(postId, likesArray),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+      });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GET_CURRENT_UER] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GET_POSTS] });
+    },
+  });
+};
 
 // delete -post
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn:({ postId,imageId}: {postId:string,imageId:string}) => deletePost(postId,imageId),
+    mutationFn: ({ postId, imageId }: { postId: string; imageId: string }) =>
+      deletePost(postId, imageId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-      })
-    }
-  })
-}
+      });
+    },
+  });
+};
 
 // search-posts
-export const useSearchPosts = (searchTerm:string) => {
+export const useSearchPosts = (searchTerm: string) => {
   return useQuery({
-    queryKey:[QUERY_KEYS.SEARCH_POSTS],
+    queryKey: [QUERY_KEYS.SEARCH_POSTS],
     queryFn: () => searchPosts(searchTerm),
     enabled: !!searchTerm,
-  })
-}
+  });
+};
 
 //get infinite post
 export const useGetInfinitePost = () => {
@@ -145,12 +145,15 @@ export const useGetInfinitePost = () => {
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
     queryFn: getInfinitePosts,
     getNextPageParam: (lastPage) => {
-      if(lastPage && lastPage.documents.length === 0) return null;
+      if (lastPage && lastPage.documents.length === 0) {
+        return null;
+      }
 
-      const lastId = lastPage?.documents[lastPage.documents.length-1].$id;
+      const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+      console.log(lastId, "Last ID");
 
       return lastId;
-    }
-
-  })
-}
+    },
+    // initialPageParam: undefined, 
+  });
+};

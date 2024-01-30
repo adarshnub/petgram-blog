@@ -4,9 +4,10 @@ import {
   useGetInfinitePost,
   useSearchPosts,
 } from "@/lib/react-query/queriesAndMutations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoFilter } from "react-icons/io5";
+import {useInView} from 'react-intersection-observer';
 
 export type SearchResultProps = {
   isSearchFetching: boolean;
@@ -15,9 +16,14 @@ export type SearchResultProps = {
 
 const Saved = () => {
   const [searchValue, setSearchValue] = useState("");
+  const { ref, inView}  = useInView();
 
   const { data: posts, fetchNextPage, hasNextPage } = useGetInfinitePost();
   const { data: searchedPosts, isFetching } = useSearchPosts(searchValue);
+
+  useEffect(() => {
+    if(inView && !searchValue) fetchNextPage()
+  },[inView,searchValue])
 
   if (!posts) {
     return (
@@ -31,6 +37,8 @@ const Saved = () => {
   const shouldShowPosts =
     !shouldShowSearchResults &&
     posts.pages.every((item) => item?.documents.length === 0);
+
+   
 
   return (
     <div className="w-full max-w-5xl">
@@ -69,11 +77,18 @@ const Saved = () => {
           <div key={index} 
           className=" w-full items-center flex justify-center"
           >
-            <GridPostList key={`page-${index}`} posts={item.documents}  />
+            <GridPostList key={`page-${index}`} posts={item?.documents || [] }  />
           </div>
           )
         )}
       </div>
+      {
+        hasNextPage && !searchValue && (
+          <div className="text-center mt-16" ref={ref}>
+            <p>Loading...</p>
+          </div>
+        )
+      }
     </div>
   );
 };
