@@ -140,24 +140,43 @@ export const useSearchPosts = (searchTerm: string) => {
 };
 
 //get infinite post
+// export const useGetInfinitePost = () => {
+//   return useInfiniteQuery({
+//     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+//     queryFn: getInfinitePosts,
+//     getNextPageParam: (lastPage) => {
+//       if (lastPage && lastPage.documents.length === 0) {
+//         return null;
+//       }
+
+//       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+
+//       console.log(lastId, "Last ID before parsing");
+
+//       const parsedId = parseInt(lastId || '0');
+//       console.log(parsedId,"parsedID")
+//       // return parseInt(lastId || '0');
+
+//       return parsedId;
+
+//     },
+//     initialPageParam: 0,
+//   });
+// };
+
 export const useGetInfinitePost = () => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
-    queryFn: getInfinitePosts,
-    getNextPageParam: (lastPage) => {
+    queryFn: getInfinitePosts as any,
+    getNextPageParam: (lastPage: any) => {
       if (lastPage && lastPage.documents.length === 0) {
         return null;
       }
 
-      const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
-
-      // const lastIdNum = parseInt(lastId,10)
-
-      // return lastIdNum;
-      console.log(lastId, "Last ID");
-
-      return parseInt(lastId || '');
+      const lastId = lastPage.documents[lastPage.documents.length - 1].$id;
+      console.log(lastId, "LAST-ID");
+      return lastId;
     },
-    initialPageParam: 0,
+    initialPageParam: null,
   });
 };

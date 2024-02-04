@@ -352,11 +352,11 @@ export async function deletePost (postId:string,imageId:string) {
 }
 
 //  infinite scroll-get post
-export async function getInfinitePosts({pageParam}:{pageParam:number}) {
-    const queries: any[] = [Query.orderDesc(`$updatedAt`), Query.limit(9)];
+export async function getInfinitePosts({pageParam}:{pageParam:string}) {
+    const queries: any[] = [Query.orderDesc(`$updatedAt`), Query.limit(4)];
 
     if(pageParam) {
-        queries.push(Query.cursorAfter(pageParam.toString()));
+        queries.push(Query.cursorAfter(pageParam));
     }
 
     try {
