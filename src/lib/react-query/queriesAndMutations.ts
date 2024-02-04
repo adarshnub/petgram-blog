@@ -150,10 +150,14 @@ export const useGetInfinitePost = () => {
       }
 
       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
+
+      // const lastIdNum = parseInt(lastId,10)
+
+      // return lastIdNum;
       console.log(lastId, "Last ID");
 
-      return lastId;
+      return parseInt(lastId || '');
     },
-    // initialPageParam: undefined, 
+    initialPageParam: 0,
   });
 };
